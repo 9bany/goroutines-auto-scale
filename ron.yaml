@@ -1,0 +1,5 @@
+root_path: "./"
+exec_path: "main.go"
+language: "go"
+watch_extension:
+  - go
