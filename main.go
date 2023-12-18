@@ -45,8 +45,9 @@ func startAutoScale() {
 	go asyncReceiver(c, fmt.Sprintf("receier: %d", receiveCounter))
 	go asyncSender(c)
 	for {
-		l := len(c)
-		fmt.Println(l)
+		// debug
+		// l := len(c)
+		// fmt.Println(l)
 		if shouldScale(c) > 0 {
 			name := fmt.Sprintf("receier: %d", receiveCounter)
 			fmt.Println("Run new go rountine with name: ", name)
@@ -55,4 +56,8 @@ func startAutoScale() {
 		}
 		time.Sleep(time.Second)
 	}
+}
+
+func main() {
+	startAutoScale()
 }
