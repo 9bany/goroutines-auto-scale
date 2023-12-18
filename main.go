@@ -14,7 +14,7 @@ func asyncReceiver(c chan int, name string) {
 		}
 		<-c
 		r := rand.Intn(100) + 300
-		time.Sleep(time.Duration(r) * time.Millisecond) 
+		time.Sleep(time.Duration(r) * time.Millisecond)
 	}
 }
 
@@ -39,7 +39,7 @@ func shouldScale(c chan int) int {
 
 }
 
-func main() {
+func startAutoScale() {
 	receiveCounter := 0
 	c := make(chan int, 20)
 	go asyncReceiver(c, fmt.Sprintf("receier: %d", receiveCounter))
@@ -48,7 +48,7 @@ func main() {
 		l := len(c)
 		fmt.Println(l)
 		if shouldScale(c) > 0 {
-			name:= fmt.Sprintf("receier: %d", receiveCounter)
+			name := fmt.Sprintf("receier: %d", receiveCounter)
 			fmt.Println("Run new go rountine with name: ", name)
 			receiveCounter++
 			go asyncReceiver(c, name)
